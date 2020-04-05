@@ -1,0 +1,20 @@
+Source: pulseaudio-modules-droid-hidl-28
+Section: sound
+Priority: optional
+Maintainer: Danct12 <danct12@disroot.org>
+Build-Depends: debhelper (>= 7),
+               dh-autoreconf,
+               android-headers-28,
+               pulseaudio-modules-droid-dev,
+               pulseaudio-dev,
+               libpulse-dev,
+               libltdl-dev,
+               audiosystem-passthrough-dev
+Standards-Version: 3.8.4
+
+Package: pulseaudio-modules-droid-hidl-28
+Architecture: any
+Depends: pulseaudio,
+         pulseaudio-modules-droid-28,
+         ${shlibs:Depends}, ${misc:Depends}
+Description: HIDL module for PulseAudio
