@@ -33,6 +33,10 @@
 #include <valgrind/memcheck.h>
 #endif
 
+#ifndef SCM_CREDENTIALS
+#define SCM_CREDENTIALS 0x02
+#endif
+
 #include <pulse/rtclock.h>
 #include <pulse/timeval.h>
 #include <pulse/xmalloc.h>
