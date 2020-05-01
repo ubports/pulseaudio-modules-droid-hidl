@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Danct12 <danct12@disroot.org>
 Build-Depends: debhelper (>= 7),
                dh-autoreconf,
+               libdbus-1-dev,
                android-headers-28,
                pulseaudio-modules-droid-dev,
                pulseaudio-dev,
