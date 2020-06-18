@@ -14,9 +14,9 @@ AM_CFLAGS = \
 
 modlibexec_LTLIBRARIES = module-droid-hidl.la
 
-noinst_HEADERS = module-droid-hidl-symdef.h
+noinst_HEADERS = module-symdef-compat.h
 
 module_droid_hidl_la_SOURCES = module-droid-hidl.c
 module_droid_hidl_la_LDFLAGS = -module -avoid-version -Wl,-no-undefined -Wl,-z,noexecstack
 module_droid_hidl_la_LIBADD = $(AM_LIBADD) -lm
-module_droid_hidl_la_CFLAGS = $(AM_CFLAGS)
+module_droid_hidl_la_CFLAGS = $(AM_CFLAGS) -DPA_MODULE_NAME=module_droid_hidl

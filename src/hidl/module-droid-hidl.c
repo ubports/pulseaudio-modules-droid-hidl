@@ -52,7 +52,7 @@
 #include <droid/droid-util.h>
 
 #include <audiosystem-passthrough/common.h>
-#include "module-droid-hidl-symdef.h"
+#include "module-symdef-compat.h"
 
 PA_MODULE_AUTHOR("Juho Hämäläinen");
 PA_MODULE_DESCRIPTION("Droid AudioSystem passthrough");
