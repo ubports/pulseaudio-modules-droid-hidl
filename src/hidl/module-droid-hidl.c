@@ -49,7 +49,12 @@
 #include <pulsecore/dbus-util.h>
 #include <pulsecore/start-child.h>
 
-#include <droid/droid-util.h>
+/*
+ * Because the name of the droid module can change according to the module
+ * suffix, use a definition defined from the autoconf which will have the
+ * correct name.
+ */
+#include DROID_HIDL_DROID_UTIL_H
 
 #include <audiosystem-passthrough/common.h>
 #include "module-symdef-compat.h"
