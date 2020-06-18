@@ -52,7 +52,7 @@
 #include <droid/droid-util.h>
 
 #include <audiosystem-passthrough/common.h>
-#include "module-droid-hidl-28-symdef.h"
+#include "module-droid-hidl-symdef.h"
 
 PA_MODULE_AUTHOR("Juho Hämäläinen");
 PA_MODULE_DESCRIPTION("Droid AudioSystem passthrough");
@@ -73,12 +73,12 @@ static const char* const valid_modargs[] = {
 #define HELPER_BINARY       PASSTHROUGH_HELPER_DIR "/" PASSTHROUGH_HELPER_EXE
 #define BUFFER_MAX          (512)
 
-#if ANDROID_VERSION_MAJOR == 9
-// For Android 8 and 9, Binder IDX is 18
-//     Android 7      ,               17
+#if ANDROID_VERSION_MAJOR <= 7
+#define DEFAULT_BINDER_IDX  "17"
+#elif ANDROID_VERSION_MAJOR <= 8
 #define DEFAULT_BINDER_IDX  "18"
 #else
-#error "ANDROID_VERSION_MAJOR is not 9 (API 28)"
+#define DEFAULT_BINDER_IDX  "18"
 #endif
 
 #define QTI_INTERFACE_NAME  "IQcRilAudio"

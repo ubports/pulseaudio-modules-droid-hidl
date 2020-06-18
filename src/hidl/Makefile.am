@@ -12,11 +12,11 @@ AM_CFLAGS = \
 	-I$(top_srcdir)/src/hidl
 
 
-modlibexec_LTLIBRARIES = module-droid-hidl-28.la
+modlibexec_LTLIBRARIES = module-droid-hidl.la
 
-noinst_HEADERS = module-droid-hidl-28-symdef.h
+noinst_HEADERS = module-droid-hidl-symdef.h
 
-module_droid_hidl_28_la_SOURCES = module-droid-hidl-28.c
-module_droid_hidl_28_la_LDFLAGS = -module -avoid-version -Wl,-no-undefined -Wl,-z,noexecstack
-module_droid_hidl_28_la_LIBADD = $(AM_LIBADD) -lm
-module_droid_hidl_28_la_CFLAGS = $(AM_CFLAGS)
+module_droid_hidl_la_SOURCES = module-droid-hidl.c
+module_droid_hidl_la_LDFLAGS = -module -avoid-version -Wl,-no-undefined -Wl,-z,noexecstack
+module_droid_hidl_la_LIBADD = $(AM_LIBADD) -lm
+module_droid_hidl_la_CFLAGS = $(AM_CFLAGS)
