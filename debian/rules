@@ -5,11 +5,20 @@ include /usr/share/dpkg/default.mk
 
 PA_MODULE_DIR := $$(readlink -f /usr/lib/pulse-*/modules)
 
+ANDROID_API_VERSIONS := 28
+
 %:
 	dh $@ --with=autoreconf --parallel --fail-missing
 
 override_dh_auto_configure:
-	dh_auto_configure -- --disable-static --with-module-dir=${PA_MODULE_DIR}
+	for API in $(ANDROID_API_VERSIONS); do \
+		mkdir -p debian/build-$$API debian/install-$$API; \
+		dh_auto_configure -B debian/build-$$API -- \
+			--disable-static \
+			--with-module-dir=${PA_MODULE_DIR} \
+			--with-android-headers=android-headers-$$API \
+			--with-module-suffix=$$API || exit $$?; \
+	done
 
 override_dh_autoreconf:
 	echo ${DEB_VERSION_UPSTREAM} > .tarball-version
@@ -17,10 +26,27 @@ override_dh_autoreconf:
 
 override_dh_auto_clean:
 	if [ -f .tarball-version ]; then rm .tarball-version; fi
+	for API in $(ANDROID_API_VERSIONS); do \
+		rm -rf debian/build-$$API debian/install-$$API; \
+	done
 	dh_auto_clean
 
 override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info -l/usr/lib/${DEB_HOST_MULTIARCH}/pulseaudio:${PA_MODULE_DIR}
 
+override_dh_auto_build:
+	for API in $(ANDROID_API_VERSIONS); do \
+		dh_auto_build -B debian/build-$$API || exit $$?; \
+	done
+
 override_dh_auto_install:
-	dh_auto_install
+	for API in $(ANDROID_API_VERSIONS); do \
+		dh_auto_install -B debian/build-$$API --destdir debian/install-$$API || exit $$?; \
+		rm debian/install-$$API/usr/lib/pulse-8.0/modules/*.la; \
+	done
+
+override_dh_install:
+	for API in $(ANDROID_API_VERSIONS); do \
+		dh_install --sourcedir=debian/install-$$API \
+			-ppulseaudio-modules-droid-hidl-$$API || exit $$?; \
+	done
