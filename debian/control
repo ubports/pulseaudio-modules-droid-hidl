@@ -1,4 +1,4 @@
-Source: pulseaudio-modules-droid-hidl-28
+Source: pulseaudio-modules-droid-hidl
 Section: sound
 Priority: optional
 Maintainer: Danct12 <danct12@disroot.org>
@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 7),
                dh-autoreconf,
                libdbus-1-dev,
                android-headers-28,
-               pulseaudio-modules-droid-dev,
+               pulseaudio-modules-droid-28-dev,
                pulseaudio-dev,
                libpulse-dev,
                libltdl-dev,
