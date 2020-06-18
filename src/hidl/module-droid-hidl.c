@@ -49,7 +49,13 @@
 #include <pulsecore/dbus-util.h>
 #include <pulsecore/start-child.h>
 
-#include <droid/droid-util.h>
+/*
+ * Because the name of the droid module can change according to the module
+ * suffix, use the forwarding header which will have the correct name filled
+ * by autoconf.
+ */
+#include "droid-util.h"
+
 
 #include <audiosystem-passthrough/common.h>
 #include "module-symdef-compat.h"

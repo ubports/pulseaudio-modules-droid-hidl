@@ -12,11 +12,11 @@ AM_CFLAGS = \
 	-I$(top_srcdir)/src/hidl
 
 
-modlibexec_LTLIBRARIES = module-droid-hidl.la
+modlibexec_LTLIBRARIES = module-droid-hidl$(DROID_MODULE_SUFFIX).la
 
 noinst_HEADERS = module-symdef-compat.h
 
-module_droid_hidl_la_SOURCES = module-droid-hidl.c
-module_droid_hidl_la_LDFLAGS = -module -avoid-version -Wl,-no-undefined -Wl,-z,noexecstack
-module_droid_hidl_la_LIBADD = $(AM_LIBADD) -lm
-module_droid_hidl_la_CFLAGS = $(AM_CFLAGS) -DPA_MODULE_NAME=module_droid_hidl
+module_droid_hidl__DROID_MODULE_SUFFIX__la_SOURCES = module-droid-hidl.c
+module_droid_hidl__DROID_MODULE_SUFFIX__la_LDFLAGS = -module -avoid-version -Wl,-no-undefined -Wl,-z,noexecstack
+module_droid_hidl__DROID_MODULE_SUFFIX__la_LIBADD = $(AM_LIBADD) -lm
+module_droid_hidl__DROID_MODULE_SUFFIX__la_CFLAGS = $(AM_CFLAGS) -DPA_MODULE_NAME=module_droid_hidl
