@@ -49,10 +49,15 @@
 #include <pulsecore/dbus-util.h>
 #include <pulsecore/start-child.h>
 
-#include <droid/droid-util.h>
+/*
+ * Because the name of the droid module can change according to the module
+ * suffix, use a definition defined from the autoconf which will have the
+ * correct name.
+ */
+#include DROID_HIDL_DROID_UTIL_H
 
 #include <audiosystem-passthrough/common.h>
-#include "module-droid-hidl-28-symdef.h"
+#include "module-symdef-compat.h"
 
 PA_MODULE_AUTHOR("Juho Hämäläinen");
 PA_MODULE_DESCRIPTION("Droid AudioSystem passthrough");
@@ -73,12 +78,12 @@ static const char* const valid_modargs[] = {
 #define HELPER_BINARY       PASSTHROUGH_HELPER_DIR "/" PASSTHROUGH_HELPER_EXE
 #define BUFFER_MAX          (512)
 
-#if ANDROID_VERSION_MAJOR == 9
-// For Android 8 and 9, Binder IDX is 18
-//     Android 7      ,               17
+#if ANDROID_VERSION_MAJOR <= 7
+#define DEFAULT_BINDER_IDX  "17"
+#elif ANDROID_VERSION_MAJOR <= 8
 #define DEFAULT_BINDER_IDX  "18"
 #else
-#error "ANDROID_VERSION_MAJOR is not 9 (API 28)"
+#define DEFAULT_BINDER_IDX  "18"
 #endif
 
 #define QTI_INTERFACE_NAME  "IQcRilAudio"
